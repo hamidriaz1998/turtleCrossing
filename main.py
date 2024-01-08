@@ -11,6 +11,7 @@ screen.tracer(0)
 # Initialize Objects
 player = Player()
 carManager = CarManager()
+scoreboard = Scoreboard()
 
 # Player Controls
 screen.listen()
@@ -21,15 +22,21 @@ count = 0
 while isGameOn:
     time.sleep(0.1)
     screen.update()
+
     if count % 6 == 0:
         carManager.createCar()
     carManager.moveCars()
     count += 1
-    # Check player collision with a car
-    if any(map(lambda i: player.distance(i) < 20, carManager.allCars)):
-        isGameOn = False
+
     # Check if player has reached the end
     if player.ycor() > 279:
+        scoreboard.incrementLevel()
         player.resetPos()
+
+    # Check player collision with a car (game over)
+    if any(map(lambda i: player.distance(i) < 20, carManager.allCars)):
+        isGameOn = False
+        scoreboard.gameOver()
+
 
 screen.exitonclick()

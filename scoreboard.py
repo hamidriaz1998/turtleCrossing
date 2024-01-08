@@ -12,8 +12,9 @@ class Scoreboard(Turtle):
     def printLevel(self):
         self.reset()
         self.penup()
+        self.color("black")
         self.hideturtle()
-        self.goto(-280, 280)
+        self.goto(-220, 260)
         self.write(f"Level: {self.level}", align="center", font=FONT)
 
     def gameOver(self):
@@ -22,3 +23,7 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.goto(0, 0)
         self.write("Game Over", align="center", font=FONT)
+
+    def incrementLevel(self):
+        self.level += 1
+        self.printLevel()
