@@ -16,14 +16,20 @@ carManager = CarManager()
 screen.listen()
 screen.onkey(player.up, "Up")
 # Game Loop
-game_is_on = True
+isGameOn = True
 count = 0
-while game_is_on:
+while isGameOn:
     time.sleep(0.1)
     screen.update()
     if count % 6 == 0:
         carManager.createCar()
     carManager.moveCars()
     count += 1
+    # Check player collision with a car
+    if any(map(lambda i: player.distance(i) < 20, carManager.allCars)):
+        isGameOn = False
+    # Check if player has reached the end
+    if player.ycor() > 279:
+        player.resetPos()
 
 screen.exitonclick()
