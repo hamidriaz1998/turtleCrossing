@@ -8,6 +8,13 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
 
+# Initialize Objects
+player = Player()
+
+# Player Controls
+screen.listen()
+screen.onkey(player.up, "Up")
+# Game Loop
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
